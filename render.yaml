@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: auriclens
+    runtime: node
+    repo: https://github.com/nifasathfarhanak/manalihackathon.git
+    branch: main
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        value: https://sfcczrhorpxctukbikkf.supabase.co
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        value: sb_publishable_cfpEMGgbM4OB_21Pawloqg_GPVo8NL2
+      - key: NEXT_PUBLIC_TINYFISH_API_KEY
+        value: sk-tinyfish-Fna9NAJi9JGqQxKhH9HRXmkU-5x00PPU
+      - key: TINYFISH_API_KEY
+        value: sk-tinyfish-Fna9NAJi9JGqQxKhH9HRXmkU-5x00PPU
+      - key: NODE_ENV
+        value: production
