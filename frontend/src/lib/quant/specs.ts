@@ -41,6 +41,26 @@ export const MCX_GOLD_SPECS: Record<MCXSymbol, MCXContract> = {
     liquidity_tier: "High",
     is_active: true,
   },
+  GOLDTEN: {
+    id: "GOLDTEN",
+    symbol: "GOLDTEN",
+    name: "Gold Ten (10g)",
+    trading_unit_grams: 10.0,
+    trading_unit_desc: "10 grams",
+    quotation_unit_grams: 10.0,
+    quotation_unit_desc: "₹ per 10 grams",
+    purity_fineness: 999,
+    purity_karat: "24K Fine Gold (99.9% pure)",
+    tick_size: 1.0,
+    lot_multiplier: 1.0, // 10g / 10g quotation = 1 unit per point
+    initial_margin_pct: 10.0,
+    tender_period_days: 5,
+    delivery_type: "Compulsory Delivery",
+    delivery_unit: "10 gram bar with hallmark",
+    max_order_size: 1000,
+    liquidity_tier: "Medium",
+    is_active: true,
+  },
   GOLDGUINEA: {
     id: "GOLDGUINEA",
     symbol: "GOLDGUINEA",
@@ -49,8 +69,8 @@ export const MCX_GOLD_SPECS: Record<MCXSymbol, MCXContract> = {
     trading_unit_desc: "8 grams (1 Sovereign)",
     quotation_unit_grams: 8.0,
     quotation_unit_desc: "₹ per 8 grams",
-    purity_fineness: 995,
-    purity_karat: "23.88K (99.5% pure)",
+    purity_fineness: 999, // 999 per MCX PS#03 contract table
+    purity_karat: "24K Fine Gold (99.9% pure)",
     tick_size: 1.0,
     lot_multiplier: 1.0, // 8g / 8g quotation = 1 unit per point
     initial_margin_pct: 10.0,

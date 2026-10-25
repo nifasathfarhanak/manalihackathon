@@ -84,12 +84,13 @@ export const ContractComparisonTable: React.FC = () => {
         </table>
       </div>
 
-      <div className="text-[11px] text-slate-600 bg-amber-50/50 p-3 rounded-lg border border-[#E8E1D5] flex items-center justify-between">
+      <div className="text-[11px] text-slate-600 bg-amber-50/50 p-3 rounded-lg border border-[#E8E1D5] flex items-center justify-between gap-3">
         <span>
-          Note: <strong>GOLDPETAL</strong> is 999 fineness. Its price is normalized down to 995 benchmark via factor{" "}
-          <code className="text-amber-900 font-semibold bg-white px-1 py-0.5 rounded border border-amber-200">10 × (995 / 999) = 9.95996</code>.
+          <strong>GOLDTEN</strong>, <strong>GOLDGUINEA</strong>, and <strong>GOLDPETAL</strong> are all 999 fineness. Prices normalized to 995 benchmark via factor{" "}
+          <code className="text-amber-900 font-semibold bg-white px-1 py-0.5 rounded border border-amber-200">995 / 999 = 0.995996</code>.
+          GOLDTEN expires 27th–31st (vs GOLDM: 3rd–5th). Note: GOLDTEN listed from 2025 onward — shorter history.
         </span>
-        <span className="text-slate-800 font-semibold">Delivery Center: Ahmedabad / Mumbai Basis</span>
+        <span className="text-slate-800 font-semibold whitespace-nowrap">Delivery Center: Ahmedabad / Mumbai Basis</span>
       </div>
     </div>
   );

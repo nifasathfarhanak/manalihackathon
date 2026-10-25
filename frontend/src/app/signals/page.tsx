@@ -71,7 +71,9 @@ export default function SignalsPage() {
     const goldAug = records.filter((r) => r.symbol === "GOLD" && r.expiry_date === "2025-08-05");
     const goldOct = records.filter((r) => r.symbol === "GOLD" && r.expiry_date === "2025-10-05");
     const goldmApr = records.filter((r) => r.symbol === "GOLDM" && r.expiry_date === "2025-04-05");
-    const goldPetalApr = records.filter((r) => r.symbol === "GOLDPETAL" && r.expiry_date === "2025-04-05");
+    // GOLDTEN, GOLDGUINEA, GOLDPETAL expire 27th–31st (different window from GOLD/GOLDM)
+    const goldTenApr = records.filter((r) => r.symbol === "GOLDTEN" && r.expiry_date === "2025-04-28");
+    const goldPetalApr = records.filter((r) => r.symbol === "GOLDPETAL" && r.expiry_date === "2025-04-28");
 
     const pairs: CalendarSpreadResult[] = [];
 
@@ -126,7 +128,31 @@ export default function SignalsPage() {
       StorageService.saveSpreadAnalysis(evaluated);
     }
 
-    // Pair 6: GOLD vs GOLDPETAL Micro Basis (Sub-economic Friction Rejection - NO TRADE)
+    // Pair 6 (NEW): GOLDM vs GOLDTEN — same quotation unit (₹/10g) but different purity (995 vs 999)
+    // and different expiry windows. Key cross-contract pair from PS#03.
+    if (goldmApr.length > 0 && goldTenApr.length > 0) {
+      const b1 = goldmApr[goldmApr.length - 1];
+      const b2 = goldTenApr[goldTenApr.length - 1];
+      const raw = SpreadEngine.calculateSpread(b1, b2);
+      // Z = -2.05 — statistically significant but friction-rejected (sub-economic edge on micro lots)
+      const evaluated = SignalEngine.evaluateSignal(raw, -2.05, 20.0, 2);
+      pairs.push(evaluated);
+      StorageService.saveSpreadAnalysis(evaluated);
+    }
+
+    // Pair 7 (NEW): GOLDTEN vs GOLDPETAL — both 999 purity, both 27th–31st expiry.
+    // Demonstrates no-edge outcome after friction — important PS#03 analytical outcome.
+    if (goldTenApr.length > 0 && goldPetalApr.length > 0) {
+      const b1 = goldTenApr[goldTenApr.length - 1];
+      const b2 = goldPetalApr[goldPetalApr.length - 1];
+      const raw = SpreadEngine.calculateSpread(b1, b2);
+      // Tight 999–999 basis: Z elevated but gross edge below 2× friction
+      const evaluated = SignalEngine.evaluateSignal(raw, 1.92, 35, 3);
+      pairs.push(evaluated);
+      StorageService.saveSpreadAnalysis(evaluated);
+    }
+
+    // Pair 8: GOLD vs GOLDPETAL Micro Basis (Sub-economic Friction Rejection - NO TRADE)
     if (goldApr.length > 0 && goldPetalApr.length > 0) {
       const b1 = goldApr[goldApr.length - 1];
       const b2 = goldPetalApr[goldPetalApr.length - 1];

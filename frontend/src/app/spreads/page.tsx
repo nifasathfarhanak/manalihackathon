@@ -62,11 +62,21 @@ export default function SpreadsPage() {
       leg1Expiry = "2025-04-05";
       leg2Symbol = "GOLDM";
       leg2Expiry = "2025-04-05";
+    } else if (pairKey === "GOLDM_APR25-GOLDTEN_APR25") {
+      leg1Symbol = "GOLDM";
+      leg1Expiry = "2025-04-05";
+      leg2Symbol = "GOLDTEN";
+      leg2Expiry = "2025-04-28";
+    } else if (pairKey === "GOLDTEN_APR25-GOLDPETAL_APR25") {
+      leg1Symbol = "GOLDTEN";
+      leg1Expiry = "2025-04-28";
+      leg2Symbol = "GOLDPETAL";
+      leg2Expiry = "2025-04-28";
     } else if (pairKey === "GOLD_APR25-GOLDPETAL_APR25") {
       leg1Symbol = "GOLD";
       leg1Expiry = "2025-04-05";
       leg2Symbol = "GOLDPETAL";
-      leg2Expiry = "2025-04-05";
+      leg2Expiry = "2025-04-28";
     }
 
     const leg1Bars = records.filter((r) => r.symbol === leg1Symbol && r.expiry_date === leg1Expiry);
@@ -178,6 +188,8 @@ export default function SpreadsPage() {
             { key: "GOLD_JUN25-GOLD_AUG25", label: "GOLD JUN-AUG (M2-M3)" },
             { key: "GOLD_AUG25-GOLD_OCT25", label: "GOLD AUG-OCT (M3-M4)" },
             { key: "GOLD_APR25-GOLDM_APR25", label: "GOLD vs GOLDM (Basis)" },
+            { key: "GOLDM_APR25-GOLDTEN_APR25", label: "GOLDM vs GOLDTEN ⚠️" },
+            { key: "GOLDTEN_APR25-GOLDPETAL_APR25", label: "GOLDTEN vs PETAL (999)" },
             { key: "GOLD_APR25-GOLDPETAL_APR25", label: "GOLD vs PETAL (Micro)" },
           ].map((p) => (
             <button

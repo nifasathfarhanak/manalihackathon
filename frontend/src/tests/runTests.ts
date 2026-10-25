@@ -46,10 +46,12 @@ async function runTestSuite() {
   const goldmNorm = GoldNormalizer.normalizePrice("GOLDM", 78500);
   assert(goldmNorm === 78500, "GOLDM price per 10g 995 normalization factor should be exactly 1.0");
 
-  // GOLDGUINEA: quoted per 8g at 995 -> factor is 10/8 = 1.25
-  const guineaRaw = 62800; // 62,800 per 8g
+  // GOLDGUINEA: quoted per 8g at 999 purity -> factor is (10/8) * (995/999) = 1.24499...
+  // PS#03 contract table specifies GOLDGUINEA as 999 fineness
+  const guineaRaw = 62800; // 62,800 per 8g at 999 purity
   const guineaNorm = GoldNormalizer.normalizePrice("GOLDGUINEA", guineaRaw);
-  assert(guineaNorm === 78500, `GOLDGUINEA (₹${guineaRaw}/8g) normalizes to ₹78,500/10g`);
+  // Expected: 62800 * (10/8) * (995/999) ≈ 78,185.69 (rounded to 2dp)
+  assert(Math.abs(guineaNorm - 78185.69) <= 1.0, `GOLDGUINEA (₹${guineaRaw}/8g @ 999) normalizes to ~₹78,186/10g @ 995 benchmark: got ${guineaNorm}`);
 
   // GOLDPETAL: quoted per 1g at 999 -> factor is 10 * (995/999) = 9.95996
   const petalRaw = 7881.56; // 7,881.56 per 1g 999
@@ -197,7 +199,7 @@ async function runTestSuite() {
   console.log("\n[7] Testing Storage Service & Supabase Layer...");
 
   const contracts = await StorageService.getContracts();
-  assert(contracts.length === 4, `Contracts loaded successfully (${contracts.length} official MCX contracts)`);
+  assert(contracts.length === 5, `Contracts loaded successfully (${contracts.length} official MCX contracts)`);
 
   const dbDiag = await StorageService.testDatabaseConnection();
   assert(dbDiag !== null, "Database diagnostic executed cleanly without crashing");

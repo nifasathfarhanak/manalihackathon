@@ -53,9 +53,10 @@ export default function ContractsPage() {
           <div className="p-3.5 rounded-lg bg-amber-50/40 border border-[#E8E1D5] shadow-2xs">
             <span className="font-bold text-amber-800 block mb-1">2. Purity Fineness Adjustment</span>
             <p className="text-slate-600">
-              The benchmark Indian market trades on 995 fineness (99.5% pure gold). GOLDPETAL is minted at 999 fineness (24K
-              pure). To prevent price distortion, Petal prices are deflated by factor{" "}
+              The benchmark trades on 995 fineness (99.5% pure gold). <strong>GOLDTEN</strong>, GOLDGUINEA, and GOLDPETAL
+              are minted at 999 fineness (24K pure). Their prices are deflated by factor{" "}
               <code className="text-slate-900 font-mono bg-white px-1.5 py-0.5 rounded border border-[#E8E1D5]">995 / 999 = 0.995996</code> before relative-value comparison.
+              GOLDTEN uniquely shares the same ₹/10g quotation as GOLDM, making it the purest purity-basis pair.
             </p>
           </div>
 

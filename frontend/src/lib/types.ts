@@ -1,4 +1,4 @@
-export type MCXSymbol = "GOLD" | "GOLDM" | "GOLDGUINEA" | "GOLDPETAL";
+export type MCXSymbol = "GOLD" | "GOLDM" | "GOLDTEN" | "GOLDGUINEA" | "GOLDPETAL";
 
 export interface MCXContract {
   id: string;
